@@ -1,12 +1,8 @@
 package com.rom8.ejb;
 
-import java.util.List;
+import java.util.Locale;
 
-import com.rom8.storage.Good;
-import com.rom8.storage.Warehouse;
-
-public final class Entity {
-	static final List<Good> list = new Warehouse().getGoods();
+public class Entity {
 	
 	private String name;
 	private double price;
@@ -42,5 +38,21 @@ public final class Entity {
 		this.price = price;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this){
+			return true;
+		}
+		if(!(obj instanceof Entity)){
+			return false;
+		}
+		Entity good = (Entity) obj;
+		return name.equalsIgnoreCase(good.name);
+	}
+	
+	@Override
+	public int hashCode() {
+		return name.toUpperCase(Locale.ENGLISH).hashCode();
+	}
 	
 }

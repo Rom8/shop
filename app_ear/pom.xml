@@ -15,6 +15,66 @@
   <name>Shop Application EAR</name>
 
 	<dependencies>
-		
+<!-- 	<dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2</version>
+        </dependency>    -->
+		<dependency>
+			<groupId>com.rom8.storage</groupId>
+			<artifactId>module_storage</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.rom8.ejb</groupId>
+			<artifactId>module_ejb</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ejb</type>
+<!-- 		<exclusions>
+				<exclusion>
+					<groupId>com.rom8.storage</groupId>
+					<artifactId>module_storage</artifactId>
+				</exclusion>
+			</exclusions>      -->
+		</dependency>
+		<dependency>
+			<groupId>com.rom8.web</groupId>
+			<artifactId>module_web</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>war</type>
+<!-- 		<exclusions>
+				<exclusion>
+					<groupId>com.rom8.ejb</groupId>
+					<artifactId>module_ejb</artifactId>
+				</exclusion>
+			</exclusions>     -->
+		</dependency>
 	</dependencies>
+	
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+ <!--                	<version>7</version>  omit this and your build will fail 
+    				<generateApplicationXml>false</generateApplicationXml>
+    				<defaultLibBundleDir>lib</defaultLibBundleDir>					-->
+                    <modules>
+                        <ejbModule>
+                            <groupId>com.rom8.ejb</groupId>
+                            <artifactId>module_ejb</artifactId>
+                        </ejbModule>
+                    </modules>
+	                <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                   	</archive>				
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+	
 </project>

@@ -7,4 +7,5 @@ import javax.ejb.Local;
 @Local
 public interface RetrieveData {
 	List<Entity> getAllGoods();
+	boolean addGood(Entity entity);
 }

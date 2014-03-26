@@ -34,7 +34,12 @@
 				<version>2.3</version>
                 <configuration>
                     <ejbVersion>3.2</ejbVersion>
-                    <generateClient>true</generateClient>
+                    <generateClient>false</generateClient>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

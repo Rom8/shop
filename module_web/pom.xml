@@ -48,8 +48,14 @@
 			<groupId>com.rom8.ejb</groupId>
 			<artifactId>module_ejb</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<type>ejb-client</type>
+			<type>ejb</type>
             <scope>provided</scope>
+<!--        <exclusions>
+            	<exclusion>
+            		<artifactId>module_storage</artifactId>
+            		<groupId>com.rom8.storage</groupId>
+            	</exclusion>
+            </exclusions>      -->
 		</dependency>
 	</dependencies>
 </project>
