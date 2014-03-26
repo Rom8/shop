@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition>
+		<h:form>
+			<h:dataTable value="#{userData.employees}" var="employee"
+				styleClass="employeeTable" headerClass="employeeTableHeader"
+				rowClasses="employeeTableOddRow,employeeTableEvenRow">
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					<h:outputText value="#{employee.name}"/>
+	         	</h:column>
+				<h:column>
+					<f:facet name="header">Department</f:facet>
+					<h:outputText value="#{employee.department}"/>
+	         	</h:column>
+				<h:column>
+					<f:facet name="header">Age</f:facet>
+					<h:outputText value="#{employee.age}"/>
+	         	</h:column>
+				<h:column>
+					<f:facet name="header">Salary</f:facet>
+					<h:outputText value="#{employee.salary}"/>
+	         	</h:column>
+				<h:column>
+					<f:facet name="header">Buy</f:facet>
+					<p:commandButton id="buy" 
+									 value="Add to Cart" update="buy" 
+	             					 actionListener="#{employee.buy}"
+	             					 disabled="#{employee.canEdit}" />
+	         	</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:composition>
+
+</html>
