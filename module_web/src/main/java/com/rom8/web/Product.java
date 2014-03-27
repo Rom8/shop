@@ -2,12 +2,15 @@ package com.rom8.web;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.rom8.ejb.Cart;
 import com.rom8.ejb.Entity;
 import com.rom8.ejb.RetrieveData;
 
@@ -20,9 +23,24 @@ public class Product implements Serializable {
 	@EJB
 	private RetrieveData retrieveData;
 	
+	@EJB
+	private Cart cart;
+	
+	private List<Product> products;
+	
 	private String name;
 	private double price;
 	private String description;
+	private boolean added;
+	
+	@PostConstruct
+	protected void before(){
+		products = new ArrayList<Product>();
+		for(Entity entity: retrieveData.getAllGoods()){
+			products.add(new Product(entity.getName(), entity.getPrice(), entity.getDescription()));
+		}
+		System.out.println("I WAS CALLED! " + new Date());
+	}
 	
 	public Product(){
 	}
@@ -31,6 +49,7 @@ public class Product implements Serializable {
 		this.name = name;
 		this.price = price;
 		this.description = description;
+		added = false;
 	}
 	
 	public String getName() {
@@ -57,16 +76,26 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 	
+	public boolean isAdded() {
+		return added;
+	}
+	
+	public void setAdded(boolean added) {
+		this.added = added;
+	}
+	
 	public List<Product> getProducts(){
-		List<Product> result = new ArrayList<Product>();
-		for(Entity entity: retrieveData.getAllGoods()){
-			result.add(new Product(entity.getName(), entity.getPrice(), entity.getDescription()));
-		}
-		return result;
+		return products;
 	}
 	
 	public String addProduct(){
 		retrieveData.addGood(new Entity(name, price, description));
+		return null;
+	}
+	
+	public String addProductToCart(){
+		cart.getEntities();		//will be exception, go to cart
+		added = true;
 		return null;
 	}
 }

@@ -8,29 +8,23 @@
 
 	<ui:composition>
 		<h:form>
-			<h:dataTable value="#{product.products}" var="good"
-				styleClass="employeeTable" headerClass="employeeTableHeader"
-				rowClasses="employeeTableOddRow,employeeTableEvenRow">
-				<h:column>
-					<f:facet name="header">Name</f:facet>
+			<p:dataTable value="#{product.products}" var="good">
+				<p:column headerText="Name">
 					<h:outputText value="#{good.name}"/>
-	         	</h:column>
-				<h:column>
-					<f:facet name="header">Age</f:facet>
+	         	</p:column>
+				<p:column headerText="Price">
 					<h:outputText value="#{good.price}"/>
-	         	</h:column>
-				<h:column>
-					<f:facet name="header">Salary</f:facet>
+	         	</p:column>
+<!-- 			<p:column headerText="Description">
 					<h:outputText value="#{good.description}"/>
-	         	</h:column>
-<!-- 			<h:column>
-					<f:facet name="header">Buy</f:facet>
+	         	</p:column>
+-->				<p:column>
 					<p:commandButton id="buy" 
 									 value="Add to Cart" update="buy" 
-	             					 actionListener="#{employee.buy}"
-	             					 disabled="#{employee.canEdit}" />
-	         	</h:column>   -->
-			</h:dataTable>
+	             					 actionListener="#{good.addProductToCart}"
+	             					 disabled="#{good.added}" />
+	         	</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:composition>
 
